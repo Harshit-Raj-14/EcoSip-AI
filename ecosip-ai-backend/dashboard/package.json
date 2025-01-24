@@ -16,11 +16,7 @@
     "format:check": "prettier -c src",
     "release": "standard-version",
     "push-release": "git push --follow-tags origin main",
-    "postbuild": "next-sitemap",
-    "prepare": "husky install"
-  },
-  "husky": {
-    "skipCI": true
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
@@ -52,7 +48,6 @@
     "eslint-config-next": "^11.1.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "husky": "^7.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.3.1",
     "lint-staged": "^11.2.6",
