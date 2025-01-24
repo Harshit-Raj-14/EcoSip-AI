@@ -19,6 +19,9 @@
     "postbuild": "next-sitemap",
     "prepare": "husky install"
   },
+  "husky": {
+    "skipCI": true
+  },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
     "@tailwindcss/aspect-ratio": "^0.3.0",
@@ -71,3 +74,4 @@
     ]
   }
 }
+
