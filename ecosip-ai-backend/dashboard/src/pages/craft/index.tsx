@@ -31,8 +31,8 @@ const products = [
   {
     id: 3,
     name: 'Carbon Emissions Calculator',
-    href: '#',
-    coin: 'Find out your personal C02 Footprint',
+    href: 'https://ecosip-ai-carbon-footprint-tracker.streamlit.app/',
+    coin: 'Find out your personal CO2 Footprint',
     imageSrc: 'project (1).png',
     imageAlt:
       '',
@@ -68,20 +68,22 @@ export default function CraftPage() {
                 <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 xl:gap-x-8">
                   {crafts.map((product) => (
                     <div key={product.id} className="group">
-                      <Link href={product.href}>
-                        <div>
-                          <div className="overflow-hidden bg-gray-200 rounded-3xl aspect-w-1 aspect-h-1 group-hover:opacity-75">
-                            <img
-                              src={product.imageSrc}
-                              alt={product.imageAlt}
-                              className="object-cover object-center w-full h-full"
-                            />
+                      <Link href={product.href} passHref>
+                        <a target="_blank" rel="noopener noreferrer">
+                          <div>
+                            <div className="overflow-hidden bg-gray-200 rounded-3xl aspect-w-1 aspect-h-1 group-hover:opacity-75">
+                              <img
+                                src={product.imageSrc}
+                                alt={product.imageAlt}
+                                className="object-cover object-center w-full h-full"
+                              />
+                            </div>
+                            <h4 className="mt-4 text-white">{product.name}</h4>
+                            <p className="flex items-center gap-2 mt-1 font-medium text-white">
+                              {product.coin}
+                            </p>
                           </div>
-                          <h4 className="mt-4 text-white">{product.name}</h4>
-                          <p className="flex items-center gap-2 mt-1 font-medium text-white">
-                            {product.coin}
-                          </p>
-                        </div>
+                        </a>
                       </Link>
                     </div>
                   ))}
