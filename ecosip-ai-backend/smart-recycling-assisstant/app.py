@@ -68,25 +68,31 @@ def main():
     st.title("Smart Recycling Assistant")
     st.write("AI Recycle Bot App")
 
-    # Use Streamlit's built-in camera input
-    img_data = st.camera_input("Take a photo")
+    # Allow the user to choose between uploading or taking a photo
+    option = st.radio("Choose an option:", ("Upload an Image", "Take a Photo"))
+
+    img_data = None
+    if option == "Upload an Image":
+        img_data = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+    elif option == "Take a Photo":
+        img_data = st.camera_input("Take a photo")
 
     if img_data:
         # Save and open the image using PIL
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        image_path = f"screenshot_{timestamp}.jpg"
+        image_path = f"image_{timestamp}.jpg"
         with open(image_path, "wb") as f:
             f.write(img_data.getbuffer())
 
         # Display the image in the app
-        st.image(Image.open(image_path), caption="Uploaded Image", use_column_width=True)
+        st.image(Image.open(image_path), caption="Uploaded Image", use_container_width=True)
 
         # Call Gemini API to analyze the image
         st.write("Analyzing Image...")
         analysis_result = analyze_image(image_path)
 
         if analysis_result:
-            st.write("** Analysis:**")
+            st.write("**Analysis:**")
             st.write(analysis_result)
 
             # Enable chatbot mode for further conversation
@@ -95,7 +101,7 @@ def main():
 
             if user_input:
                 chatbot_response = chatbot_mode(user_input)
-                st.write(f"Eco  Bot: {chatbot_response}")
+                st.write(f"Eco Bot: {chatbot_response}")
         else:
             st.error("Failed to analyze the image.")
 
