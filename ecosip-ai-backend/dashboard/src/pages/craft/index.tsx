@@ -13,7 +13,7 @@ const products = [
   {
     id: 1,
     name: 'Smart Recycling Assistant',
-    href: '#',
+    href: 'https://ecosip-ai-smart-recycling-bot.streamlit.app/',
     coin: 'AI Recycle Bot App',
     imageSrc: 'project (3).png',
     imageAlt:
@@ -22,7 +22,7 @@ const products = [
   {
     id: 2,
     name: 'Eco Impact Tracker',
-    href: '#',
+    href: 'https://ecosip-ai-eco-impact-tracker.streamlit.app/',
     coin: 'Eco Sustainability Coins Calculator App: GreenRewards',
     imageSrc: 'project (2).png',
     imageAlt:
