@@ -1,8 +1,8 @@
 import streamlit as st
 from PIL import Image
-import os
 from datetime import datetime
 from dotenv import load_dotenv
+import os
 import google.generativeai as genai
 
 # Load the API key from the .env file
@@ -24,17 +24,13 @@ Based on the identified object, provide:
 2. Suggestions for how it can be recycled or disposed of responsibly.
 '''
 
-def analyze_image(image_path):
+def analyze_image(image):
     try:
         # Load the generative model
         model = genai.GenerativeModel("models/gemini-1.5-pro-latest")
         
-        # Load and convert image to bytes
-        with open(image_path, "rb") as img_file:
-            image_bytes = img_file.read()
-
         # Analyze the image and identify the object
-        response = model.generate_content([identify_prompt, eco_prompt, image_bytes], stream=True)
+        response = model.generate_content([identify_prompt, eco_prompt, image], stream=True)
 
         # Collect the streamed response
         streamed_text = ""
@@ -78,18 +74,15 @@ def main():
         img_data = st.camera_input("Take a photo")
 
     if img_data:
-        # Save and open the image using PIL
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        image_path = f"image_{timestamp}.jpg"
-        with open(image_path, "wb") as f:
-            f.write(img_data.getbuffer())
+        # Open the image directly from the uploaded file
+        image = Image.open(img_data)
 
         # Display the image in the app
-        st.image(Image.open(image_path), caption="Uploaded Image", use_container_width=True)
+        st.image(image, caption="Uploaded Image", use_container_width=True)
 
         # Call Gemini API to analyze the image
         st.write("Analyzing Image...")
-        analysis_result = analyze_image(image_path)
+        analysis_result = analyze_image(image)
 
         if analysis_result:
             st.write("**Analysis:**")
